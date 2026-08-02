@@ -25,13 +25,19 @@ jobs:
       - name: Build Workbench.exe
         run: pyinstaller workbench.spec --noconfirm
 
-      - name: Install Inno Setup (winget)
+      - name: Install Inno Setup
         shell: pwsh
         run: |
-          winget install --id=JRSoftware.InnoSetup --exact --accept-source-agreements --accept-package-agreements --silent
+          # 尝试 winget，失败则用 choco
+          winget install --id=JRSoftware.InnoSetup --exact --accept-source-agreements --accept-package-agreements --silent 2>$null
           $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe"
+          if (-not (Test-Path $iscc)) {
+            choco install innosetup --no-progress -y 2>$null
+          }
           if (Test-Path $iscc) {
             echo "${env:ProgramFiles(x86)}\Inno Setup 6" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          } else {
+            Write-Error "Inno Setup not found"
           }
 
       - name: Build Setup installer
