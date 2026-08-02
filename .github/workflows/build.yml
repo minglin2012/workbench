@@ -57,9 +57,9 @@ jobs:
             dist/Workbench-Setup-*.exe
 
       - name: Create Release
-        if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ steps.ver.outputs.version }}
           files: |
             dist/Workbench.exe
             dist/Workbench-Setup-*.exe
