@@ -1,0 +1,64 @@
+name: Build & Package
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Python deps
+        run: pip install fastapi uvicorn PyYAML pystray Pillow pywin32 psutil pyinstaller
+
+      - name: Build Workbench.exe
+        run: pyinstaller workbench.spec --noconfirm
+
+      - name: Install Inno Setup
+        shell: pwsh
+        run: |
+          $url = "https://files.jrsoftware.org/is/6/innosetup-6.4.1.exe"
+          $installer = "$env:TEMP\innosetup.exe"
+          Invoke-WebRequest -Uri $url -OutFile $installer
+          Start-Process -FilePath $installer -ArgumentList "/VERYSILENT /SUPPRESSMSGBOXES /NORESTART" -Wait
+          # Add to PATH
+          $iscc = "C:\Program Files (x86)\Inno Setup 6\ISCC.exe"
+          if (Test-Path $iscc) {
+            echo "C:\Program Files (x86)\Inno Setup 6" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          }
+
+      - name: Build Setup installer
+        run: iscc installer.iss
+
+      - name: Generate version
+        id: ver
+        shell: pwsh
+        run: echo "version=$(Get-Date -Format 'yyyy.M.d').${{ github.run_number }}" >> $env:GITHUB_OUTPUT
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Workbench-${{ steps.ver.outputs.version }}
+          path: |
+            dist/Workbench.exe
+            dist/Workbench-Setup-*.exe
+
+      - name: Create Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/Workbench.exe
+            dist/Workbench-Setup-*.exe
+          generate_release_notes: true

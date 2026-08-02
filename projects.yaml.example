@@ -1,0 +1,209 @@
+# ============================================================
+#  工作台 — 项目配置示例
+#  编辑 %APPDATA%/workbench/projects.yaml 后点 🔄 热重载
+# ============================================================
+
+# 全局设置
+settings:
+  theme: "dark"               # dark | light
+  columns: 4                  # 卡片列数
+  autostart: false            # 开机自启（需安装版）
+  vscode_cmd: "code"          # VSCode 命令（Scoop: code, 标准: 自动查找）
+  obsidian_cmd: "obsidian"    # Obsidian 命令或完整路径
+  terminal_cmd: "wt"          # wt | powershell | pwsh | cmd
+  browser_cmds:               # 浏览器路径（留空=自动查找）
+    chrome: ""                # 如 "C:/Program Files/Google/Chrome/Application/chrome.exe"
+    edge: ""
+    firefox: ""
+
+# 项目列表
+projects:
+  # ============================
+  #  VSCode 项目
+  # ============================
+  - name: "发博客"
+    icon: "📝"
+    color: "#4A90D9"
+    category: "开发"
+    environment:
+      - app: "vscode"
+        target: "D:/programming/minglin2012.github.io"
+
+  # ============================
+  #  Obsidian 知识库
+  # ============================
+  - name: "私人秘书"
+    icon: "📔"
+    color: "#7C3AED"
+    category: "笔记"
+    environment:
+      - app: "obsidian"
+        target: "D:/programming/myobsidian"
+
+  # ============================
+  #  浏览器 — 支持 chrome / edge / firefox / default
+  # ============================
+  - name: "GitHub"
+    icon: "🐙"
+    color: "#333333"
+    category: "在线"
+    environment:
+      - app: "browser"
+        browser: "edge"               # chrome | edge | firefox | default
+        target: "https://github.com"
+
+  - name: "ChatGPT"
+    icon: "🤖"
+    color: "#10A37F"
+    category: "AI"
+    environment:
+      - app: "browser"
+        browser: "chrome"
+        target: "https://chat.openai.com"
+
+  - name: "本地开发预览"
+    icon: "🔧"
+    color: "#E67E22"
+    category: "开发"
+    environment:
+      - app: "browser"
+        browser: "chrome"
+        target: "http://localhost:3000"
+
+  # ============================
+  #  终端 — 在指定目录执行命令
+  # ============================
+  - name: "启动开发服务"
+    icon: "🖥️"
+    color: "#27AE60"
+    category: "开发"
+    environment:
+      - app: "terminal"
+        target: "D:/programming/myproject"
+        command: "npm run dev"
+
+  - name: "Python 环境"
+    icon: "🐍"
+    color: "#3776AB"
+    category: "开发"
+    environment:
+      - app: "terminal"
+        target: "D:/programming/myproject"
+        command: ".venv\\Scripts\\activate"
+
+  - name: "Docker Compose"
+    icon: "🐳"
+    color: "#2496ED"
+    category: "运维"
+    environment:
+      - app: "terminal"
+        target: "D:/programming/myproject"
+        command: "docker-compose up -d"
+
+  - name: "Git 状态"
+    icon: "📊"
+    color: "#F05032"
+    category: "开发"
+    environment:
+      - app: "terminal"
+        target: "D:/programming"
+        command: "git status"
+
+  # ============================
+  #  文件夹 — 资源管理器打开
+  # ============================
+  - name: "项目总目录"
+    icon: "📁"
+    color: "#95A5A6"
+    category: "文件"
+    environment:
+      - app: "folder"
+        target: "D:/programming"
+
+  - name: "下载目录"
+    icon: "📥"
+    color: "#3498DB"
+    category: "文件"
+    environment:
+      - app: "folder"
+        target: "C:/Users/Lenovo/Downloads"
+
+  # ============================
+  #  任意程序
+  # ============================
+  - name: "微信"
+    icon: "💬"
+    color: "#07C160"
+    category: "通讯"
+    environment:
+      - app: "app"
+        target: "C:/Program Files/Tencent/WeChat/WeChat.exe"
+
+  - name: "Postman"
+    icon: "📮"
+    color: "#FF6C37"
+    category: "工具"
+    environment:
+      - app: "app"
+        target: "%LOCALAPPDATA%/Postman/Postman.exe"
+
+  - name: "Figma"
+    icon: "🎨"
+    color: "#F24E1E"
+    category: "设计"
+    environment:
+      - app: "app"
+        target: "%LOCALAPPDATA%/Figma/Figma.exe"
+
+  # ============================
+  #  组合环境 — 一个项目启动多个应用
+  # ============================
+  - name: "全栈开发环境"
+    icon: "🚀"
+    color: "#E74C3C"
+    category: "开发"
+    environment:
+      - app: "vscode"
+        target: "D:/programming/myproject"
+      - app: "terminal"
+        target: "D:/programming/myproject"
+        command: "npm run dev"
+      - app: "browser"
+        browser: "chrome"
+        target: "http://localhost:3000"
+      - app: "browser"
+        browser: "edge"
+        target: "http://localhost:8000/docs"
+
+  - name: "写作工作区"
+    icon: "✍️"
+    color: "#9B59B6"
+    category: "写作"
+    environment:
+      - app: "vscode"
+        target: "D:/programming/minglin2012.github.io"
+      - app: "obsidian"
+        target: "D:/programming/myobsidian"
+      - app: "browser"
+        browser: "chrome"
+        target: "https://translate.google.com"
+
+  # ============================
+  #  app 类型高级用法 — 带参数
+  # ============================
+  - name: "Everything 搜索"
+    icon: "🔍"
+    color: "#FF9800"
+    category: "工具"
+    environment:
+      - app: "app"
+        target: "C:/Program Files/Everything/Everything.exe"
+        args: "-search "工作台""
+
+  - name: "Notepad++"
+    icon: "📄"
+    color: "#90E59A"
+    category: "工具"
+    environment:
+      - app: "app"
+        target: "C:/Program Files/Notepad++/notepad++.exe"

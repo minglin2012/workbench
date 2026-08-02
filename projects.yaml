@@ -1,0 +1,164 @@
+# ==========================================
+# 工作台 - 项目环境配置
+# 编辑此文件来管理你的项目，保存后自动生效
+# ==========================================
+
+settings:
+  window_width: 900
+  window_height: 680
+  theme: "dark"                       # dark | light | system
+  columns: 4                          # 卡片列数
+  autostart: false                    # 开机自启
+  vscode_cmd: "code"                  # VSCode 命令行（Scoop 安装的 code 已在 PATH）
+  obsidian_cmd: "obsidian"            # Obsidian 命令行，或填写完整路径
+  terminal_cmd: "wt"                  # 终端：wt=Windows Terminal, powershell=PowerShell, cmd=CMD
+  browser_cmds:                       # 浏览器路径（空字符串 = 自动检测）
+    chrome: ""
+    edge: ""
+    firefox: ""
+
+projects:
+  # ---- 开发项目 ----
+  - name: "发博客"
+    icon: "📝"
+    color: "#4A90D9"
+    category: "开发"
+    environment:
+      - app: "vscode"
+        target: "D:/programming/minglin2012.github.io"
+      - app: "terminal"
+        target: "D:/programming/minglin2012.github.io"
+        command: "echo 博客项目已就绪"
+      - app: "browser"
+        browser: "chrome"
+        target: "https://csdn.net"
+      - app: "browser"
+        browser: "chrome"
+        target: "https://www.zhihu.com/"
+      - app: "folder"
+        target: "D:/programming/minglin2012.github.io"
+
+  # ---- 笔记/知识库 ----
+  - name: "私人秘书"
+    icon: "📔"
+    color: "#7C3AED"
+    category: "笔记"
+    environment:
+      - app: "obsidian"
+        target: "D:/programming/mysocial"
+      - app: "folder"
+        target: "D:/programming/mysocial"
+
+  - name: "技术文档"
+    icon: "📔"
+    color: "#7C3AED"
+    category: "笔记"
+    environment:
+      - app: "obsidian"
+        target: "D:/programming/myobsidian"
+      - app: "folder"
+        target: "D:/programming/myobsidian"
+
+  # ---- 看科技 / 新闻 ----
+  - name: "科技新闻"
+    icon: "📰"
+    color: "#F59E0B"
+    category: "新闻"
+    environment:
+      # 1. Hacker News — 全球技术圈首页，每天刷 5 分钟
+      - app: "browser"
+        browser: "chrome"
+        target: "https://news.ycombinator.com"
+      # 2. GitHub Trending — 开源热度风向标
+      - app: "browser"
+        browser: "chrome"
+        target: "https://github.com/trending"
+      # 3. X/Twitter — AI 圈对话发生地
+      - app: "browser"
+        browser: "chrome"
+        target: "https://x.com"
+      # 4. The Batch — 吴恩达 AI 周报
+      - app: "browser"
+        browser: "chrome"
+        target: "https://www.deeplearning.ai/the-batch/"
+      # 5. Reddit r/LocalLLaMA — 开源 LLM 第一手消息
+      - app: "browser"
+        browser: "chrome"
+        target: "https://www.reddit.com/r/LocalLLaMA/"
+      # 6. InfoQ 中文 — 技术趋势深度文章
+      - app: "browser"
+        browser: "chrome"
+        target: "https://www.infoq.cn"
+      # 7. 36氪 — 科技+商业新闻
+      - app: "browser"
+        browser: "chrome"
+        target: "https://36kr.com"
+      # 8. V2EX — 华人开发者社区
+      - app: "browser"
+        browser: "chrome"
+        target: "https://www.v2ex.com"
+      # 9. Product Hunt — 新科技产品
+      - app: "browser"
+        browser: "chrome"
+        target: "https://www.producthunt.com"
+      # 10. YouTube 技术区 — Fireship 频道
+      - app: "browser"
+        browser: "chrome"
+        target: "https://www.youtube.com/@beyondfireship"
+
+  # ---- 在线工具 ----
+  - name: "GitHub"
+    icon: "🐙"
+    color: "#333333"
+    category: "在线"
+    environment:
+      - app: "browser"
+        browser: "edge"
+        target: "https://github.com"
+
+
+  - name: "大模型Agent - 软件开发"
+    icon: "🔍"
+    color: "#4285F4"
+    category: "软件开发"
+    environment:
+      - app: "vscode"
+        target: "D:/programming/agent_orchestrator"
+      - app: "folder"
+        target: "D:/programming/agent_orchestrator"
+
+  - name: "对话式AI - 研究"
+    icon: "🤖"
+    color: "#FF6B6B"
+    category: "对话"
+    environment:
+      - app: "app"
+        target: "C:/Users/Lenovo/AppData/Local/Doubao/Application/Doubao.exe"
+        title_kw: "豆包"
+      - app: "app"
+        target: "C:/Program Files/Cherry Studio/Cherry Studio.exe"
+      - app: "browser"
+        browser: "chrome"
+        target: "https://chatgpt.com/"
+      - app: "browser"
+        browser: "chrome"
+        target: "https://deepseek.com/"
+
+  # ---- 更多工具（按需添加）----
+  # - name: "Notion"
+  # ---- 更多项目（按需添加）----
+  # - name: "题库管理"
+  #   icon: "📋"
+  #   color: "#E67E22"
+  #   category: "工具"
+  #   environment:
+  #     - app: "vscode"
+  #       target: "D:/programming/题库管理"
+  #
+  # - name: "聊天导出工具"
+  #   icon: "💬"
+  #   color: "#2ECC71"
+  #   category: "工具"
+  #   environment:
+  #     - app: "vscode"
+  #       target: "D:/programming/WeChat-Export-Tool"
